@@ -31,10 +31,15 @@ drivers = {
     'nvidia': 'prime-indicator-nvidia-symbolic',
     'intel': 'prime-indicator-nvidia-symbolic',
     'other': 'prime-indicator-symbolic',
-    'nouveau': 'prime-indicator-nouveau-symbolic', # only for my personal test
 }
 
-def check_current(drivers):
+def curent_driver = get_check_current(drivers):
+    # if curent_driver == "other" : exit(1) ??? user not have intel or nvidia, we exit
+    indicator = appindicator.Indicator.new(APPINDICATOR_ID, icon, appindicator.IndicatorCategory.SYSTEM_SERVICES)
+    indicator.set_status(appindicator.IndicatorStatus.ACTIVE)
+    indicator.set_menu(build_menu())
+    notify.init(APPINDICATOR_ID)
+    gtk.main()
     import subprocess
     try:
         proc = subprocess.Popen(['glxinfo','-B' ], text=True, stdout = subprocess.PIPE)
