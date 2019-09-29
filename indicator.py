@@ -55,11 +55,6 @@ def curent_driver = get_check_current(drivers):
         if s in drivers.keys():
             return s
     return 'other' # not found
-    indicator = appindicator.Indicator.new(APPINDICATOR_ID, icon, appindicator.IndicatorCategory.SYSTEM_SERVICES)
-    indicator.set_status(appindicator.IndicatorStatus.ACTIVE)
-    indicator.set_menu(build_menu())
-    notify.init(APPINDICATOR_ID)
-    gtk.main()
 
 def build_menu():
     menu = gtk.Menu()
@@ -75,7 +70,7 @@ def build_menu():
     return menu
 
 def nvidia(_):
-    result, output, error, status = glib.spawn_command_line_sync('/usr/share/suseprime-appindicator/scripts/pkexec_nvidia')
+    result, output, error, status = glib.spawn_command_line_sync('/usr/share/optimus-switch-indicator/scripts/pkexec_nvidia')
     if (error):
         notify.Notification.new(error_head, error.decode("utf-8"), 'dialog-warning').show()
     elif (result):
@@ -84,7 +79,7 @@ def nvidia(_):
         notify.Notification.new(error_head, output.decode("utf-8"), 'dialog-warning').show()
 
 def intel(_):
-    result, output, error, status = glib.spawn_command_line_sync('/usr/share/suseprime-appindicator/scripts/pkexec_intel')
+    result, output, error, status = glib.spawn_command_line_sync('/usr/share/optimus-switch-indicator/scripts/pkexec_intel')
     if (error):
         notify.Notification.new(error_head, error.decode("utf-8"), 'dialog-warning').show()
     elif (result):
